@@ -45,25 +45,90 @@ solution code must meet the following constraints:
 
 /* PROBLEM 1. findDuplicatesIterative: Must solve with iteration, not recursion */
 
-// Your code here 
+// const findDuplicatesIterative = (arr) =>{
+//   let result = []
+//   let obj = {}
+//   for(let ele of arr){
+//     if(obj[ele] === undefined){
+//       obj[ele] = 1
+//     }else{
+//       obj[ele]++
+//     }
+//   }
+//   for(let key in obj){
+//     if(obj[key] > 1) {
+//       if(typeof arr[0] === 'number'){
+//         result.unshift(+key)
+//       }else{
+//         result.unshift(key)
+//       }
+//     }
+
+//   }
+
+// return result
+// }
 
 
 
 /* PROBLEM 2. findDuplicatesRecursive: Must solve with recursion */
 
-// Your code here 
+// const findDuplicatesRecursive = (arr, res = []) =>{
+//   let ele1 = arr[0]
+//    if(arr.length === 0){
+//     return res
+//   }
+//   for(let i = 0; i < arr.length; i++){
+//     if(ele1 === arr[i + 1]){
+//       if(!res.includes(ele1)){
+//         res.push(ele1)
+//       }
+//     }
+//   }
+
+//   return findDuplicatesRecursive(arr.slice(1), res)
+// }
 
 
 
 /* PROBLEM 3. findDuplicatesNoDefault: Must use recursion with no default parameters */
 
-// Your code here 
+// const findDuplicatesRecursive = (arr) =>{
+//   let res = []
+//   let ele1 = arr[0]
+//    if(arr.length === 0){
+//     return []
+//   }
+//   for(let i = 0; i < arr.length; i++){
+//     if(ele1 === arr[i + 1]){
+//       if(!res.includes(ele1)){
+//         res.push(ele1)
+//       }
+//     }
+//   }
+
+//   return res.concat(findDuplicatesRecursive(arr.slice(1)))
+// }
 
 
 
 /* PROBLEM 4. findDuplicatesChallenge: No for/while loops OR array looping methods */
 
-// Your code here 
+const findDuplicatesRecursive = (arr) =>{
+  let sorted = arr.sort()
+  let result = []
+  let ele1 = arr[0]
+  let ele2 = arr[1]
+
+   if(sorted.length === 0){
+    return []
+  }
+  if(ele1 === ele2){
+    result.push(ele1)
+  }
+
+  return result.concat(findDuplicatesRecursive(sorted.slice(1)))
+}
 
 
 /*
@@ -80,12 +145,12 @@ MOCHA TESTS: Run `mocha` to run the mocha tests.
 // console.log(findDuplicatesIterative([ 'a', 'word', 'a', 'another', 'word' ]));
 // // [ 'word', 'a' ] (order of elements does not matter)
 
-// console.log(findDuplicatesRecursive([ 5, 8, 8, 2, 3 ]));
-// // [ 8 ]
-// console.log(findDuplicatesRecursive([ 5, 8, 8, 8, 2, 3, 3 ]));
-// // [ 8, 3 ] (only one 8; order of elements does not matter)
-// console.log(findDuplicatesRecursive([ 'a', 'word', 'a', 'another', 'word' ]));
-// // [ 'word', 'a' ] (order of elements does not matter)
+console.log(findDuplicatesRecursive([ 5, 8, 8, 2, 3 ]));
+// [ 8 ]
+console.log(findDuplicatesRecursive([ 5, 8, 8, 8, 2, 3, 3 ]));
+// [ 8, 3 ] (only one 8; order of elements does not matter)
+console.log(findDuplicatesRecursive([ 'a', 'word', 'a', 'another', 'word' ]));
+// [ 'word', 'a' ] (order of elements does not matter)
 
 // console.log(findDuplicatesNoDefault([ 5, 8, 8, 2, 3 ]));
 // // [ 8 ]
